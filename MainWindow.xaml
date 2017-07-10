@@ -1,0 +1,78 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local='clr-namespace:VisualWorkflowDesktopApp'
+        xmlns:m='VisualWorkflowDesktopApp.Model'
+        x:Class="VisualWorkflowDesktopApp.MainWindow"
+        Title="MainWindow"
+        Height="700"
+        Width="1050">
+
+    <Window.DataContext>
+        <local:OrderViewModel />
+    </Window.DataContext>
+
+    <!-- This stores the views for this main window -->
+    <Window.Resources>
+        <DataTemplate x:Name='fabricationView'
+                      DataType='{x:Type local:FabViewModel}'>
+            <local:FabricationView DataContext='{Binding}' />
+        </DataTemplate>
+        <DataTemplate x:Name='paintView'
+                      DataType='{x:Type local:PaintViewModel}'>
+            <local:PaintView DataContext='{Binding}' />
+        </DataTemplate>
+        <DataTemplate x:Name='storesView'
+                      DataType='{x:Type local:StoresViewModel}'>
+            <local:StoresView DataContext='{Binding}' />
+        </DataTemplate>
+    </Window.Resources>
+
+    <!-- Adds a small border around the window -->
+    
+
+        <!-- Used to differentiate top menu for view and display -->
+        <Grid>
+
+            <!-- Sets two rows to differentiate Menu and view -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height='50' />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            
+            <!-- Rectangle to fill in background of menu. -->
+            <Rectangle Fill='WhiteSmoke'
+                       Grid.Row='0'/>
+            
+            <!-- Panel to hold menu items -->
+            <DockPanel>
+                <StackPanel HorizontalAlignment='Center'
+                            Orientation='Horizontal'>
+                    <Button Style='{StaticResource MenuButton}'
+                            Content='Main Menu'>
+                    </Button>
+
+                    <Button Style='{StaticResource MenuButton}'
+                            Content='Fabrication'
+                            Click='fab_click' />
+
+                    <Button Style='{StaticResource MenuButton}'
+                            Content='Paint'
+                            Click='paint_click' />
+
+                    <Button Style='{StaticResource MenuButton}'
+                            Content='Stores'
+                            Click='stores_click' />
+
+                    <Button Style='{StaticResource MenuButton}'
+                            Content='About'
+                            Click='click_about' />
+                </StackPanel>
+            </DockPanel>
+            
+            <!-- This content control defines the area that the user controls occupy.  -->
+            <ContentControl Grid.Row='1' Content='{Binding}'/>
+            
+        </Grid>
+ 
+</Window> 
+                                                           
